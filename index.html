@@ -67,8 +67,32 @@
                     <path d="M25 80 Q50 95 75 80" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
                 </svg>
             </div>
+
+            <!-- 聊天气泡触发器 -->
+            <div class="chat-trigger" id="chatTrigger">
+                <div class="bubble-text">点我聊天 💬</div>
+            </div>
         </div>
         
+        <!-- 微信风格聊天窗口 -->
+        <div class="wechat-container" id="chatModal" style="display: none;">
+            <div class="wechat-header">
+                <span class="back-btn" id="closeChat">&lt;</span>
+                <span class="wechat-title">花不缺</span>
+                <span class="wechat-menu">...</span>
+            </div>
+            <div class="wechat-messages" id="messageList">
+                <div class="message received">
+                    <div class="avatar">🎄</div>
+                    <div class="content">二妞宝宝，我是花不缺呀！圣诞快乐，有什么想对我说的吗？✨</div>
+                </div>
+            </div>
+            <div class="wechat-input-area">
+                <input type="text" id="chatInput" placeholder="发消息..." autocomplete="off">
+                <button id="sendBtn">发送</button>
+            </div>
+        </div>
+
         <!-- 音乐控制按钮 -->
         <div class="music-control" id="musicControl">
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="music-icon">
