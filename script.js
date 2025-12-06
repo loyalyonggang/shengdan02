@@ -413,7 +413,7 @@ const messageList = document.getElementById('messageList');
 // API 配置
 // const API_KEY = '...'; // Key 已移至后端环境变量，前端不再暴露
 const API_URL = '/api/chat'; // 指向 Vercel 的 Serverless Function
-const MODEL = 'Qwen/Qwen2.5-7B-Instruct';
+const MODEL = 'Pro/Qwen/Qwen2.5-7B-Instruct';
 
 // 切换聊天窗口显示
 chatTrigger.addEventListener('click', (e) => {
