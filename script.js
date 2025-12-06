@@ -420,8 +420,8 @@ const sendBtn = document.getElementById('sendBtn');
 const messageList = document.getElementById('messageList');
 
 // API 配置
-const API_KEY = 'sk-seiiooeibrvkxypfbkdfbtpsiyhiuuiobzndjftusbsyumae'; // 注意：前端直接暴露 Key 有风险，生产环境请走后端代理
-const API_URL = 'https://api.siliconflow.cn/v1/chat/completions';
+// const API_KEY = '...'; // Key 已移至后端环境变量，前端不再暴露
+const API_URL = '/api/chat'; // 指向 Vercel 的 Serverless Function
 const MODEL = 'Qwen/Qwen2.5-7B-Instruct';
 
 // 切换聊天窗口显示
@@ -449,12 +449,12 @@ async function sendMessage() {
     sendBtn.disabled = true;
     sendBtn.textContent = '...';
 
-    // 2. 调用 API
+    // 2. 调用 API (Vercel 转发)
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${API_KEY}`,
+                // 'Authorization': `Bearer ${API_KEY}`, // 前端不需要传 Key 了
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
