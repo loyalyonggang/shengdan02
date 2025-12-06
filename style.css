@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+    color: #fff;
+    font-family: 'Zcool KuaiLe', 'Ma Shan Zheng', cursive, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* 打字机容器 */
+.typing-container {
+    position: absolute;
+    z-index: 2;
+    bottom: 25%; /* 提高位置，避开人物 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    height: 150px; /* 固定高度，约3行文字的高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /*文字从底部向上堆叠或者正常显示，这里我们用JS控制添加，所以justify-content: flex-end 让文字贴底比较好看，或者 flex-start */
+    justify-content: flex-start; 
+    align-items: center;
+    pointer-events: none;
+    text-align: center;
+    overflow: hidden; /* 隐藏溢出 */
+}
+
+/* 动漫人物容器 */
+.couple-container {
+    position: absolute;
+    bottom: 5%; /* 放在底部，稍微遮挡树干 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    z-index: 3; /* 在树和文字之上 */
+    pointer-events: none;
+}
+
+.character {
+    width: 80px;
+    height: 120px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.boy {
+    animation: sway 3s ease-in-out infinite;
+}
+
+.girl {
+    animation: sway 3s ease-in-out infinite reverse; /* 反向摇摆，感觉在互动 */
+}
+
+.heart {
+    font-size: 2rem;
+    color: #e74c3c;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    margin-bottom: 60px; /* 让爱心飘在中间上方 */
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+}
+
+.typing-line {
+    font-size: clamp(1.2rem, 4vw, 1.8rem); /* 响应式字体 */
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 2px 2px 2px rgba(0, 0, 0, 0.5);
+    margin: 5px 0;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    min-height: 1.5em;
+    font-family: 'Ma Shan Zheng', cursive;
+    line-height: 1.5;
+}
+
+.typing-line.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+
+.music-control {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.music-control:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.music-icon {
+    color: #fff;
+    width: 20px;
+    height: 20px;
+}
+
+.music-playing .music-icon {
+    animation: rotate 3s linear infinite;
+    color: #2ecc71;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        transform: translate(-50%, -55%);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glowRed {
+    from {
+        text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 77, 77, 0.9), 0 0 30px rgba(255, 77, 77, 0.7);
+    }
+}
+
+@keyframes glowGreen {
+    from {
+        text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(46, 204, 113, 0.9), 0 0 30px rgba(46, 204, 113, 0.7);
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .message-container {
+        width: 90%;
+    }
+}
