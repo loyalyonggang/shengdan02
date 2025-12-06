@@ -350,27 +350,18 @@ let currentCharIndex = 0;
 let activeLineElement = null;
 
 function typeWriter() {
-    // if (currentLineIndex >= lines.length) return; // 移除这个检查，或者改为重置逻辑（但在下面处理更好）
-    
     // 如果没有当前行元素，创建一个
     if (!activeLineElement) {
         // 安全检查
         if (currentLineIndex >= lines.length) currentLineIndex = 0;
 
+        // 字幕模式：开始新的一行前，清空容器（或只保留最后一行直到淡出）
+        // 这里我们选择清空，实现"一句一句"的效果
+        typingContainer.innerHTML = '';
+
         activeLineElement = document.createElement('p');
-        activeLineElement.className = 'typing-line';
+        activeLineElement.className = 'typing-line subtitle-mode'; // 添加 subtitle-mode 类以便样式控制
         typingContainer.appendChild(activeLineElement);
-        
-        // 保持只有三行：如果有超过3个子元素，移除第一个
-        if (typingContainer.children.length > 3) {
-            const firstChild = typingContainer.firstElementChild;
-            firstChild.classList.add('fade-out'); // 添加淡出动画类
-            setTimeout(() => {
-                if (firstChild && firstChild.parentNode === typingContainer) {
-                    typingContainer.removeChild(firstChild);
-                }
-            }, 500); // 这里的事件要和 CSS 动画时间匹配
-        }
     }
 
     const currentLineText = lines[currentLineIndex];
@@ -380,7 +371,7 @@ function typeWriter() {
         activeLineElement.textContent += currentLineText.charAt(currentCharIndex);
         currentCharIndex++;
         
-        // 打字速度随机
+        // 打字速度
         setTimeout(typeWriter, Math.random() * 100 + 50);
     } else {
         //这一行打完了
@@ -388,14 +379,14 @@ function typeWriter() {
         currentCharIndex = 0;
         activeLineElement = null;
 
-        // 检查是否全部播放完毕，如果是，重置循环
+        // 检查是否全部播放完毕
         if (currentLineIndex >= lines.length) {
             currentLineIndex = 0;
-            // 等待较长一段时间后重新开始，或者在最后一行停留更久
-            setTimeout(typeWriter, 3000); 
+            // 播放完最后一句，多停留一会儿
+            setTimeout(typeWriter, 4000); 
         } else {
-            // 行与行之间的停顿
-            setTimeout(typeWriter, 1000);
+            // 行与行之间的停顿（字幕停留时间）
+            setTimeout(typeWriter, 2000);
         }
     }
 }

@@ -105,6 +105,15 @@ canvas {
     line-height: 1.5;
 }
 
+/* 字幕模式特定样式 */
+.typing-line.subtitle-mode {
+    font-size: clamp(1.5rem, 5vw, 2.2rem); /* 字幕模式稍微大一点 */
+    background: rgba(0, 0, 0, 0.3); /* 半透明背景增加可读性 */
+    padding: 5px 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
 .typing-line.fade-out {
     animation: fadeOut 0.5s forwards;
 }
